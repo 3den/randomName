@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Get a Random Name</title>
+    <script>
+        var Namer = {
+            alphabet: 'abcdefghijklmnopqrstuvwxyz',
+
+            setSize: function (size) {
+                this.size = size;
+            },
+
+            getRandomLetter: function () {
+                return this.alphabet[Math.floor(Math.random() * this.alphabet.length)];
+            },
+
+            getRandom: function () {
+                var count = Math.round(Math.random() * (this.size - 3) + 3);
+                var name = '';
+
+                for (var i = 0; i < count; i++) {
+                    name = name + this.getRandomLetter();
+                }
+
+                return name;
+            }
+        };
+
+        var namer = Object.create(Namer);
+        var setSize = namer.setSize.bind(namer);
+
+        function randomize() {
+            var result = document.getElementById('result');
+            result.textContent = namer.getRandom();
+        }
+    </script>
+</head>
+<body align='center'>
+    <h1>Get a random name</h1>
+    <p>
+        <label for='size'>Max Size</label>
+        <input name='size' type="number" oninput="setSize(this.value)">
+        <input type='submit' value="randomize!" onclick="randomize()" >
+    </p>
+    <h3 id="result"></h3>
+</body>
+</html>
